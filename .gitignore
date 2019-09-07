@@ -24,3 +24,10 @@ benchmarks/benchmarks
 tests/stabtest/stabtest
 tests/unittests/unittests
 
+.ionide
+.buckd
+buck-out
+.buckconfig.local
+.buckconfig.d
+buckaroo
+buckaroo_macros.bzl

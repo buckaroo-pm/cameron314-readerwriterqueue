@@ -1,0 +1,45 @@
+language: cpp
+sudo: true
+dist: bionic
+
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-6
+      - gcc-6
+      - make
+      - libevent-dev
+      - libgflags-dev
+      - libiberty-dev
+      - liblz4-dev
+      - liblzma-dev
+      - libsnappy-dev
+      - zlib1g-dev
+      - binutils-dev
+      - libjemalloc-dev
+      - libssl-dev
+      - libunwind8-dev
+      - pkg-config
+
+os:
+  - linux
+  - osx
+
+env:
+  - BUCKAROO_VERSION=v2.2.0 PKG_CONFIG_PATH=/usr/lib/pkgconfig
+
+cache:
+  directories:
+    - $HOME/.buckaroo/cache
+    - $TRAVIS_BUILD_DIR/bin
+
+osx_image: xcode9.3
+
+before_install:
+  - ./travis/before-install-$TRAVIS_OS_NAME.sh
+
+script:
+  - ./bin/buckaroo install
+  - ./bin/buck build -c ui.superconsole=DISABLED //...
